@@ -1,9 +1,13 @@
 package com.example.android.myapplication.view;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -22,14 +26,20 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class GameSecNumActivity extends AppCompatActivity implements GameSecNumView,MenuUcc.OnFragmentInteractionListener {
+public class GameSecNumActivity extends AppCompatActivity implements GameSecNumView, MenuUcc.OnFragmentInteractionListener {
 
     public static final String SEQUENCE = "SEQ";
     private String SentNum = "";
-    static Random RandonGenerator = new Random();
-    static int randomInteger = 0, cont = 0, Rand1 = 0, Rand2 = 0, Rand3 = 0,Rand4 = 0,Rand5 = 0;
     static String Randstg;
-    MenuUcc menuUcc;
+
+
+    public static final String BTADD = "BTADD";
+    public static final String Name = "nameKey";
+    public static final String Point = "pointKey";
+    public static final String mypreference = "mypref";
+    private String Result = "";
+
+    SharedPreferences sharedpreferences;
 
     @BindView(R.id.Txtv11)
     TextView txtv11;
@@ -84,7 +94,7 @@ public class GameSecNumActivity extends AppCompatActivity implements GameSecNumV
         String data = getIntent().getStringExtra(SEQUENCE);
         GameNumSequence gs = new Gson().fromJson(data, GameNumSequence.class);
 
-        presenter = new GameSecNumPresenterSecNumImpl(this, gs,address);
+        presenter = new GameSecNumPresenterSecNumImpl(this, gs, address);
     }
 
     @Override
@@ -105,24 +115,33 @@ public class GameSecNumActivity extends AppCompatActivity implements GameSecNumV
 
         if (borrar == "BorrarBotones") {
 
-            /*Timer timer = new Timer();
-            TimerTask t = new TimerTask() {
-                @Override
-                public void run() {
+            String array[] = new String[9];
 
-                    getTextViewFromEnum(ENnum.TXTVIEW11).setText("");
-                    getTextViewFromEnum(ENnum.TXTVIEW12).setText("");
-                    getTextViewFromEnum(ENnum.TXTVIEW13).setText("");
-                    getTextViewFromEnum(ENnum.TXTVIEW14).setText("");
-                    getTextViewFromEnum(ENnum.TXTVIEW21).setText("");
-                    getTextViewFromEnum(ENnum.TXTVIEW22).setText("");
-                    getTextViewFromEnum(ENnum.TXTVIEW23).setText("");
-                    getTextViewFromEnum(ENnum.TXTVIEW24).setText("");
+            String TXT1 = String.valueOf(getTextViewFromEnum(ENnum.TXTVIEW11).getText());
+            String TXT2 = String.valueOf(getTextViewFromEnum(ENnum.TXTVIEW12).getText());
+            String TXT3 = String.valueOf(getTextViewFromEnum(ENnum.TXTVIEW13).getText());
+            String TXT4 = String.valueOf(getTextViewFromEnum(ENnum.TXTVIEW14).getText());
+            String TXT5 = String.valueOf(getTextViewFromEnum(ENnum.TXTVIEW21).getText());
+            String TXT6 = String.valueOf(getTextViewFromEnum(ENnum.TXTVIEW22).getText());
+            String TXT7 = String.valueOf(getTextViewFromEnum(ENnum.TXTVIEW23).getText());
+            String TXT8 = String.valueOf(getTextViewFromEnum(ENnum.TXTVIEW24).getText());
+            String conct = TXT1 + "," + TXT2 + "," + TXT3 + "," + TXT4 + "," + TXT5 + "," + TXT6 + "," + TXT7 + "," + TXT8;
+            String conct2 = "";
+            String[] txts = conct.split(",");
 
+            for (int x = 0; x < array.length - 1; x++) {
+                try {
+                    if (txts[x].equals("")) {
+                        //break;
+                    } else {
+                        array[x] = txts[x] + ",";
+                        conct2 += array[x];
+                    }
+                } catch (Exception ex) {
+                    break;
                 }
-
-            };
-            timer.scheduleAtFixedRate(t, 0, 10000);*/
+            }
+            presenter.SecuenceRecpt(conct2);
             getTextViewFromEnum(ENnum.TXTVIEW11).setText("");
             getTextViewFromEnum(ENnum.TXTVIEW12).setText("");
             getTextViewFromEnum(ENnum.TXTVIEW13).setText("");
@@ -131,33 +150,43 @@ public class GameSecNumActivity extends AppCompatActivity implements GameSecNumV
             getTextViewFromEnum(ENnum.TXTVIEW22).setText("");
             getTextViewFromEnum(ENnum.TXTVIEW23).setText("");
             getTextViewFromEnum(ENnum.TXTVIEW24).setText("");
-
         }
-
-        //if
 
         /*FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
         menuUcc=new MenuUcc();
         fragmentTransaction.replace(R.id.ContenedorNiv,menuUcc);
         fragmentTransaction.commit();*/
-
     }
-
-
-    @OnClick(R.id.Siguiente)
-    void Siguiente() {
-        finish();
-    }
-
 
     @Override
     public void Result(String Result) {
+        this.Result = Result;
         IdBufferIn.setText(Result);
+    }
+
+    @OnClick(R.id.Siguiente)
+    void Siguiente() {
+
+        String n = "Bien";
+        String e = "Mal";
+        sharedpreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.commit();
+        editor.putString(Name, n);
+        editor.commit();
+        Log.d("result", Result);
+        if (Result.equals("BIEN")) {
+            editor.putString(Name, n).commit();
+            // editor.putInt(Point, 1).commit();
+        } else {
+            editor.putString(Name, e).commit();
+        }
+        finish();
     }
 
     @Override
     public void SentNum(String SentNum) {
-        this.Randstg=SentNum;
+        this.Randstg = SentNum;
     }
 
     //Encender los botones
@@ -168,34 +197,25 @@ public class GameSecNumActivity extends AppCompatActivity implements GameSecNumV
 
         if (txt == ENnum.TXTVIEW11) {
             getTextViewFromEnum(txt).setText(Randstg);
-        }
-        else if (txt == ENnum.TXTVIEW12) {
+        } else if (txt == ENnum.TXTVIEW12) {
             getTextViewFromEnum(txt).setText(Randstg);
-        }
-        else if (txt == ENnum.TXTVIEW13) {
+        } else if (txt == ENnum.TXTVIEW13) {
             getTextViewFromEnum(txt).setText(Randstg);
-        }
-        else if (txt == ENnum.TXTVIEW14) {
+        } else if (txt == ENnum.TXTVIEW14) {
             getTextViewFromEnum(txt).setText(Randstg);
-        }
-        else if (txt == ENnum.TXTVIEW21) {
+        } else if (txt == ENnum.TXTVIEW21) {
             getTextViewFromEnum(txt).setText(Randstg);
-        }
-        else if (txt == ENnum.TXTVIEW22) {
+        } else if (txt == ENnum.TXTVIEW22) {
             getTextViewFromEnum(txt).setText(Randstg);
-        }
-        else if (txt == ENnum.TXTVIEW23) {
+        } else if (txt == ENnum.TXTVIEW23) {
             getTextViewFromEnum(txt).setText(Randstg);
-        }
-        else if (txt == ENnum.TXTVIEW24) {
+        } else if (txt == ENnum.TXTVIEW24) {
             getTextViewFromEnum(txt).setText(Randstg);
+        } else {
         }
-        else{}
-
     }
 
     TextView getTextViewFromEnum(ENnum txt) {
-
         switch (txt) {
             case TXTVIEW11:
                 return txtv11;
@@ -216,36 +236,6 @@ public class GameSecNumActivity extends AppCompatActivity implements GameSecNumV
                 return txtv24;
         }
     }
-
-   /* public static void generarSecuencia() {
-
-        for (cont = 0; cont < 4; cont++) {
-            randomInteger = RandonGenerator.nextInt(9) + 1;
-
-            switch (cont) {
-                case 0:
-                    Rand1 = randomInteger;
-                    Randstg = Integer.toString(Rand1);
-                    break;
-                case 1:
-                    Rand2 = randomInteger;
-                    Randstg = Integer.toString(Rand2);
-                    break;
-                case 2:
-                    Rand3 = randomInteger;
-                    Randstg = Integer.toString(Rand3);
-                    break;
-                case 3:
-                    Rand4 = randomInteger;
-                    Randstg = Integer.toString(Rand4);
-                    break;
-                case 4:
-                    Rand5 = randomInteger;
-                    Randstg = Integer.toString(Rand5);
-                    break;
-            }
-        }
-    }*/
 
     @Override
     public void onFragmentInteraction(Uri uri) {

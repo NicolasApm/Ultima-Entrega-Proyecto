@@ -106,7 +106,7 @@ public class Registro extends Fragment {
 
             }
         });
-
+/*
         btnPrueba1 = getActivity().findViewById(R.id.pruebaNivel);
         btnPrueba1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,7 +157,7 @@ public class Registro extends Fragment {
                 CallGame2();
                 sequence2.clear();
             }
-        });
+        });*/
     }
 
     public void onButtonPressed(Uri uri) {
@@ -183,7 +183,7 @@ public class Registro extends Fragment {
         mListener = null;
     }
 
-    public void CallGame() {
+   /* public void CallGame() {
 
         if (getBtAdress() != null) {
             GameSequence seq = new GameSequence();
@@ -208,7 +208,7 @@ public class Registro extends Fragment {
 
         j.putExtra(GameSecNumActivity.SEQUENCE, tx);
         startActivity(j);
-    }
+    }*/
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

@@ -8,4 +8,6 @@ public interface GamePresenter {
 
      void start();
 
+     void process();
+
 }

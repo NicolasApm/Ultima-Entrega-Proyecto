@@ -33,6 +33,8 @@ public class InitGameActivity extends AppCompatActivity {
     public static final String Intentos = "intentosKey";
     private SharedPreferences sharedpreferences;
     private SharedPreferences.Editor editor;
+    private List<ENnum> sequence2 = new ArrayList<>();
+    private Niv6_7Secuence secuenciaNiv67 = new Niv6_7Secuence(sequence2);
 
     private String address;
     private String SharedSave = "";
@@ -64,18 +66,26 @@ public class InitGameActivity extends AppCompatActivity {
             int findAgeUserInt = Integer.parseInt(findAgeUser);
             if (findAgeUserInt <= 5) {
                 CallGame();
-            } else if (findAgeUserInt == 6) {
-                Toast.makeText(getBaseContext(), findAgeUserInt, Toast.LENGTH_SHORT).show();
-            } else if (findAgeUserInt == 7) {
-                Toast.makeText(getBaseContext(), findAgeUserInt, Toast.LENGTH_SHORT).show();
-            } else if (findAgeUserInt == 8) {
-                Toast.makeText(getBaseContext(), findAgeUserInt, Toast.LENGTH_SHORT).show();
+            }
+            if (findAgeUserInt == 6) {
+
+                //secuenciaNiv67.CuartaSec();
+                CallGame2();
+               // sequence2.clear();
+
+     //           Toast.makeText(this, findAgeUser, Toast.LENGTH_SHORT).show();
+            }
+            if (findAgeUserInt == 7) {
+                Toast.makeText(this, findAgeUser, Toast.LENGTH_SHORT).show();
+            }
+            if (findAgeUserInt == 8) {
+                Toast.makeText(this, findAgeUser, Toast.LENGTH_SHORT).show();
                /* secuenciaNiv67.CuartaSec();
                 CallGame2();
                 sequence2.clear();*/
             }
         } catch (Exception e) {
-            //Toast.makeText(getBaseContext(), "No hay registos en DB", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No hay registos en DB", Toast.LENGTH_SHORT).show();
             Log.e("ERRORINIT", "error init", e);
         }
     }
@@ -134,7 +144,7 @@ public class InitGameActivity extends AppCompatActivity {
         //SecuenceList.add(3, SecuenceL3);
         GameSequence seq = new GameSequence();
 
-        seq.setSequence(SecuenceList.get(2));
+      //  seq.setSequence(SecuenceList.get(2));
 
         if (SharedSave.equals(null) || SharedSave.equals("")) {
             seq.setSequence(SecuenceList.get(0));
@@ -182,12 +192,78 @@ public class InitGameActivity extends AppCompatActivity {
     }
 
     public void CallGame2() {
-        /*GameNumSequence seq = new GameNumSequence();
-        seq.setSequence(sequence2);
+
+        SharedPref();
+
+        List<ENnum> SecuenceL1 = new ArrayList<>();
+        SecuenceL1.add(ENnum.TXTVIEW13);
+        SecuenceL1.add(ENnum.TXTVIEW14);
+        SecuenceL1.add(ENnum.TXTVIEW21);
+
+        List<ENnum> SecuenceL2 = new ArrayList<>();
+        SecuenceL2.add(ENnum.TXTVIEW11);
+        SecuenceL2.add(ENnum.TXTVIEW12);
+        SecuenceL2.add(ENnum.TXTVIEW13);
+        SecuenceL2.add(ENnum.TXTVIEW14);
+
+        List<ENnum> SecuenceL3 = new ArrayList<>();
+        SecuenceL3.add(ENnum.TXTVIEW11);
+        SecuenceL3.add(ENnum.TXTVIEW12);
+        SecuenceL3.add(ENnum.TXTVIEW13);
+        SecuenceL3.add(ENnum.TXTVIEW14);
+        SecuenceL3.add(ENnum.TXTVIEW21);
+
+        List<List<ENnum>> SecuenceList = new ArrayList<>();
+        SecuenceList.add(0, SecuenceL1);
+        SecuenceList.add(1, SecuenceL2);
+        SecuenceList.add(2, SecuenceL3);
+        //SecuenceList.add(3, SecuenceL3);
+
+        GameNumSequence seq = new GameNumSequence();
+       // seq.setSequence(SecuenceList.get(0));
+        if (SharedSave.equals(null) || SharedSave.equals("")) {
+            seq.setSequence(SecuenceList.get(0));
+        }
+
+        if (SharedSave.equals("Bien")) {
+            IndexLvl = SharedPoint + 1;
+            if (IndexLvl <= SecuenceList.size() - 1) {
+                editor.putInt(Point, IndexLvl);
+                editor.commit();
+                seq.setSequence(SecuenceList.get(IndexLvl));
+                Log.d("Shared pointind", String.valueOf(IndexLvl));
+            } else {
+                Toast.makeText(getBaseContext(), "Nivel maximo", Toast.LENGTH_SHORT).show();
+                editor.putInt(Intentos, 0);
+                editor.putInt(Point, 0);
+                editor.putInt(PointInd, 0);
+                editor.putString(Name, "");
+                editor.commit();
+                return;
+            }
+        }
+        if (SharedSave.equals("Mal")) {
+            seq.setSequence(SecuenceList.get(SharedPoint));
+            intentos = SharedIntentos + 1;
+            Log.d("Shared intentos", String.valueOf(intentos));
+            editor.putInt(Intentos, intentos);
+            editor.commit();
+            if (SharedIntentos == 3) {
+                Toast.makeText(getBaseContext(), "Perdiste", Toast.LENGTH_SHORT).show();
+                editor.putInt(Intentos, 0);
+                editor.putInt(PointInd, 0);
+                editor.putInt(Point, 0);
+                editor.putString(Name, "");
+                editor.commit();
+                return;
+            }
+        }
+        editor.putString(Name, "").commit();
+
         String tx = new Gson().toJson(seq);
         j.putExtra(GameSecNumActivity.SEQUENCE, tx);
         j.putExtra(EXTRA_DEVICE_ADDRESS, address);
-        startActivity(j);*/
+        startActivity(j);
     }
 }
 

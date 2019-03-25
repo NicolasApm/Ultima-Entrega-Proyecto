@@ -28,11 +28,13 @@ public class GameSecNumPresenterSecNumImpl implements GameSecNumPresenter, BTCal
     private ENnum btn = null;
     private String btAdd;
     private BTUtil btUtil;
+    private String NumRecpt="";
 
     //ArrayList<String> lista = new ArrayList<>(sequence.getSequence().size());
 
     static Random RandonGenerator = new Random();
-    static int randomInteger = 0, cont = 0, Rand1 = 0, Rand2 = 0, Rand3 = 0, Rand4 = 0, Rand5 = 0;
+    static int randomInteger = 0, cont = 0, Rand1 = 0, Rand2 = 0, Rand3 = 0, Rand4 = 0, Rand5 = 0,
+                                            Rand6 = 0,Rand7 ;
     static String Randstg;
 
 
@@ -61,7 +63,14 @@ public class GameSecNumPresenterSecNumImpl implements GameSecNumPresenter, BTCal
                 if (sequence.getSequence().size() <= index) {
                     timer.cancel();
                     view.Borrar("BorrarBotones");
-                    process();
+
+                    try{
+                        process();
+                    }
+                    catch (Exception e){
+
+                    }
+                   // process();
                     return;
                 }
                 btn = sequence.getSequence().get(index);
@@ -79,15 +88,24 @@ public class GameSecNumPresenterSecNumImpl implements GameSecNumPresenter, BTCal
         }, 1000, SEQ_TIME);
     }
 
+
+
+    @Override
+    public void SecuenceRecpt(String dataNum) {
+        this.NumRecpt=dataNum;
+    }
+
     private void process() {
-        try {
+        /*try {
             String seqSize = String.valueOf(sequence.getSequence().size());
 
             btUtil.connect(btAdd, this);
            // btUtil.write(seqSize);
         } catch (Exception e) {
             Log.e("Falla Connected", "Error Conexion Bluetooth ", e);
-        }
+        }*/
+        Log.d("RECEPCION", NumRecpt);
+        view.Result("BIEN");
     }
 
     @Override
@@ -97,7 +115,6 @@ public class GameSecNumPresenterSecNumImpl implements GameSecNumPresenter, BTCal
         } catch (Exception ex) {
             Log.e("Close Socket", "Error cerrando", ex);
         }
-
         Log.d("DataRecept", data);
         String[] btns = data.split(",");
 
@@ -116,7 +133,6 @@ public class GameSecNumPresenterSecNumImpl implements GameSecNumPresenter, BTCal
                 break;
             }
         }
-
         if (flag) {
             Log.d("Comparacion Secuencia", "Bien");
             view.Result("BIEN");
@@ -125,7 +141,6 @@ public class GameSecNumPresenterSecNumImpl implements GameSecNumPresenter, BTCal
             view.Result("MAL");
         }
         btUtil.close();
-
     }
 
     @Override
@@ -137,39 +152,12 @@ public class GameSecNumPresenterSecNumImpl implements GameSecNumPresenter, BTCal
 
     public void generarSecuencia() {
 
-        for (cont = 0; cont < 4; cont++) {
+        for (cont = 0; cont < 7; cont++) {
             randomInteger = RandonGenerator.nextInt(9) + 1;
 
-            switch (cont) {
-                case 0:
-
-                    Rand1 = randomInteger;
-                    Randstg = Integer.toString(Rand1);
-                    view.SentNum(Randstg);
-                    break;
-                case 1:
-                    Rand2 = randomInteger;
-                    Randstg = Integer.toString(Rand2);
-                    view.SentNum(Randstg);
-                    break;
-                case 2:
-                    Rand3 = randomInteger;
-                    Randstg = Integer.toString(Rand3);
-                    view.SentNum(Randstg);
-                    break;
-                case 3:
-                    Rand4 = randomInteger;
-                    Randstg = Integer.toString(Rand4);
-                    view.SentNum(Randstg);
-                    break;
-                case 4:
-                    Rand5 = randomInteger;
-                    Randstg = Integer.toString(Rand5);
-                    view.SentNum(Randstg);
-                    break;
-
-            }
-           // lista.add(cont, Randstg);
+            Rand1 = randomInteger;
+            Randstg = Integer.toString(Rand1);
+            view.SentNum(Randstg);
         }
     }
 }

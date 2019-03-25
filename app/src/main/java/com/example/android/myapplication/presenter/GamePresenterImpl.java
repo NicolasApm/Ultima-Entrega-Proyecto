@@ -51,11 +51,11 @@ public class GamePresenterImpl implements GamePresenter, BTCallback {
                 if (sequence.getSequence().size() <= index) {
                     timer.cancel();
                     view.Borrar("BorrarBotones");
-                    try{
+                   /* try{
                     process();}
                     catch (Exception e){
 
-                    }
+                    }*/
                     return;
                 }
                 btn = sequence.getSequence().get(index);
@@ -73,7 +73,7 @@ public class GamePresenterImpl implements GamePresenter, BTCallback {
         }, 1000, SEQ_TIME);
     }
 
-    private void process() {
+    public void process() {
 
         try {
             String seqSize = String.valueOf(sequence.getSequence().size()-1);

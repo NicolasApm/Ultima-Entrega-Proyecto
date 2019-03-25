@@ -82,6 +82,9 @@ public class GameActivity extends AppCompatActivity implements GameView, Conecta
     @BindView(R.id.Siguiente)
     Button Siguiente;
 
+    @BindView(R.id.Compare)
+    Button Compare;
+
     private GamePresenter presenter;
 
     //Funcion para oprimir botones y saber posicion
@@ -151,18 +154,13 @@ public class GameActivity extends AppCompatActivity implements GameView, Conecta
             getButtonFromEnum(EBotones.BUTTON42).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
             getButtonFromEnum(EBotones.BUTTON43).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
             getButtonFromEnum(EBotones.BUTTON44).setBackground(getResources().getDrawable(R.drawable.boton_redondo));
-
         }
     }
 
-
     @Override
     public void Result(String Result) {
-
         this.Result = Result;
-
         IdBufferIn.setText(Result);
-
     }
 
     @OnClick(R.id.Siguiente)
@@ -173,32 +171,29 @@ public class GameActivity extends AppCompatActivity implements GameView, Conecta
         //finish();
         String n = "Bien";
         String e = "Mal";
-
         sharedpreferences = getSharedPreferences(mypreference,Context.MODE_PRIVATE);
-
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.commit();
-
-
         editor.putString(Name, n);
         editor.commit();
-
         Log.d("result", Result);
-
         if (Result.equals("BIEN")) {
-
             editor.putString(Name, n).commit();
            // editor.putInt(Point, 1).commit();
-
         } else {
-
             editor.putString(Name, e).commit();
-
-        }
-
-
+       }
         finish();
+    }
 
+    @OnClick(R.id.Compare)
+    void Compare() {
+        try{
+            presenter.process();
+            }
+        catch (Exception e){
+            Log.e("ErrorProces", "No se pudo Compare: ",e);
+        }
     }
 
 

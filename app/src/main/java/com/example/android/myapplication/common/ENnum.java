@@ -1,14 +1,14 @@
 package com.example.android.myapplication.common;
 
 public enum ENnum {
-    TXTVIEW11("11"),
-    TXTVIEW12("12"),
-    TXTVIEW13("13"),
-    TXTVIEW14("14"),
-    TXTVIEW21("21"),
-    TXTVIEW22("22"),
-    TXTVIEW23("23"),
-    TXTVIEW24("24");
+    TXTVIEW11("a"),
+    TXTVIEW12("b"),
+    TXTVIEW13("c"),
+    TXTVIEW14("d"),
+    TXTVIEW21("e"),
+    TXTVIEW22("f"),
+    TXTVIEW23("g"),
+    TXTVIEW24("h");
 
     private String id;
     ENnum(String id) {
