@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="FONDO2">#6b6363</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="presionado">#65bdcf</color>
+    <color name="borde">#2596c6</color>
+    <color name="foco">#ff141177</color>
+    <color name="xdefecto">#3e171721</color>
+    <color name="xdefecto1">#800033FF</color>
+    <color name="xdefecto2">#8000FF33</color>
+    <color name="xdefecto3">#80FFFF00</color>
+    <color name="RojoSangre">#80FF3300</color>
+    <color name="Rojo">#ffff1411</color>
+    <color name="Azul">#ff141177</color>
+    <color name="Amarillo_oscuro">#ffffbf1d</color>
+    <color name="Amarillo_Claro">#d8ff28</color>
+    <color name="borde_toast_advertencia">#ff141177</color>
+    <color name="Verde_Claro2">#ff9ACD32</color>
+    <color name="Blanco">#ffffffff</color>
+    <color name="texto_toast_ok">#00115377</color>
+    <color name="fondo_toast_informacion">#ff141177</color>
+    <color name="Verde_Claro">#25c643</color>
+    <color name="button_normal">#ff141177</color>
+    <color name="Gris">#7c7d7c</color>
+    <color name="dialog_divider">#ff141177</color>
+    <color name="Violeta">#9f0e96</color>
+    <color name="Naranja">#ff9514</color>
+    <color name="Azul_Claro">#3c9ef4</color>
+    <color name="Verde_Oscuro">#025824</color>
+
+</resources>
