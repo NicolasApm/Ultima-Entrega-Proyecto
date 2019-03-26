@@ -22,6 +22,19 @@
 
     </style>
 
+    <style name="TeclaNum2" >
+        <item name="android:layout_width">350dp</item>
+        <item name="android:layout_height">350dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">80sp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@drawable/botinitgame</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textAllCaps">false</item>
+
+    </style>
+
     <style name="TeclaRedondo" >
 
         <item name="android:background">@drawable/boton_redondo</item>

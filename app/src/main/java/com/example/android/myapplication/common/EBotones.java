@@ -15,7 +15,7 @@ public enum EBotones {
     BUTTON34("c"),
     BUTTON41("*"),
     BUTTON42("0"),
-    BUTTON43("#"),
+    BUTTON43("z"),
     BUTTON44("d"),
     BUTTONS1("1"),
     BUTTONS2("2"),

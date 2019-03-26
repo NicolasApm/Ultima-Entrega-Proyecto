@@ -35,12 +35,16 @@ public class InitGameActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     private List<ENnum> sequence2 = new ArrayList<>();
     private Niv6_7Secuence secuenciaNiv67 = new Niv6_7Secuence(sequence2);
+    List<List<ENnum>> SecuenceList = new ArrayList<>();
+    List<List<EBotones>> SecuenceListColors = new ArrayList<>();
 
+    private String IndLvl;
     private String address;
     private String SharedSave = "";
     private String findAgeUser;
     private int SharedPoint = 0, IndexLvl = 0, SharedIntentos, intentos = 0;
     private Intent i, j;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,20 +70,29 @@ public class InitGameActivity extends AppCompatActivity {
             int findAgeUserInt = Integer.parseInt(findAgeUser);
             if (findAgeUserInt <= 5) {
                 CallGame();
+
             }
             if (findAgeUserInt == 6) {
-
+                IndLvl = "6años";
                 //secuenciaNiv67.CuartaSec();
-                CallGame2();
-               // sequence2.clear();
+                CallGame2(IndLvl);
+                SecuenceList.clear();
 
-     //           Toast.makeText(this, findAgeUser, Toast.LENGTH_SHORT).show();
+                //           Toast.makeText(this, findAgeUser, Toast.LENGTH_SHORT).show();
             }
             if (findAgeUserInt == 7) {
-                Toast.makeText(this, findAgeUser, Toast.LENGTH_SHORT).show();
+                IndLvl = "7años";
+                //secuenciaNiv67.CuartaSec();
+                CallGame2(IndLvl);
+                SecuenceList.clear();
+               // Toast.makeText(this, findAgeUser, Toast.LENGTH_SHORT).show();
             }
             if (findAgeUserInt == 8) {
-                Toast.makeText(this, findAgeUser, Toast.LENGTH_SHORT).show();
+                IndLvl = "8años";
+                //secuenciaNiv67.CuartaSec();
+                CallGame2(IndLvl);
+                SecuenceList.clear();
+                //Toast.makeText(this, findAgeUser, Toast.LENGTH_SHORT).show();
                /* secuenciaNiv67.CuartaSec();
                 CallGame2();
                 sequence2.clear();*/
@@ -117,45 +130,70 @@ public class InitGameActivity extends AppCompatActivity {
         SharedPref();
         List<EBotones> SecuenceL1 = new ArrayList<>();
         SecuenceL1.add(EBotones.BUTTON11);
-        SecuenceL1.add(EBotones.BUTTON22);
+        SecuenceL1.add(EBotones.BUTTON12);
+        SecuenceL1.add(EBotones.BUTTON13);
+        SecuenceL1.add(EBotones.BUTTON23);
         SecuenceL1.add(EBotones.BUTTON33);
-        SecuenceL1.add(EBotones.BUTTON44);
+        SecuenceL1.add(EBotones.BUTTON32);
+        SecuenceL1.add(EBotones.BUTTON31);
+        SecuenceL1.add(EBotones.BUTTON21);
         SecuenceL1.add(EBotones.BUTTONS1);
 
         List<EBotones> SecuenceL2 = new ArrayList<>();
+        SecuenceL2.add(EBotones.BUTTON12);
         SecuenceL2.add(EBotones.BUTTON22);
         SecuenceL2.add(EBotones.BUTTON23);
-        SecuenceL2.add(EBotones.BUTTON33);
+        SecuenceL2.add(EBotones.BUTTON14);
+        SecuenceL2.add(EBotones.BUTTON24);
+        SecuenceL2.add(EBotones.BUTTON34);
         SecuenceL2.add(EBotones.BUTTON44);
         SecuenceL2.add(EBotones.BUTTONS2);
 
         List<EBotones> SecuenceL3 = new ArrayList<>();
-        SecuenceL3.add(EBotones.BUTTON11);
-        SecuenceL3.add(EBotones.BUTTON33);
-        SecuenceL3.add(EBotones.BUTTON32);
+        SecuenceL3.add(EBotones.BUTTON12);
+        SecuenceL3.add(EBotones.BUTTON13);
+        SecuenceL3.add(EBotones.BUTTON24);
         SecuenceL3.add(EBotones.BUTTON34);
-        SecuenceL3.add(EBotones.BUTTON44);
+        SecuenceL3.add(EBotones.BUTTON43);
+        SecuenceL3.add(EBotones.BUTTON42);
+        SecuenceL3.add(EBotones.BUTTON31);
+        SecuenceL3.add(EBotones.BUTTON21);
         SecuenceL3.add(EBotones.BUTTONS3);
 
-        List<List<EBotones>> SecuenceList = new ArrayList<>();
-        SecuenceList.add(0, SecuenceL1);
-        SecuenceList.add(1, SecuenceL2);
-        SecuenceList.add(2, SecuenceL3);
+        List<EBotones> SecuenceL4 = new ArrayList<>();
+        SecuenceL4.add(EBotones.BUTTON11);
+        SecuenceL4.add(EBotones.BUTTON12);
+        SecuenceL4.add(EBotones.BUTTON13);
+        SecuenceL4.add(EBotones.BUTTON14);
+        SecuenceL4.add(EBotones.BUTTON24);
+        SecuenceL4.add(EBotones.BUTTON34);
+        SecuenceL4.add(EBotones.BUTTON44);
+        SecuenceL4.add(EBotones.BUTTON33);
+        SecuenceL4.add(EBotones.BUTTON22);
+        SecuenceL4.add(EBotones.BUTTONS4);
+
+
+        SecuenceListColors.add(0, SecuenceL1);
+        SecuenceListColors.add(1, SecuenceL2);
+        SecuenceListColors.add(2, SecuenceL3);
+        SecuenceListColors.add(3, SecuenceL4);
+
+
         //SecuenceList.add(3, SecuenceL3);
         GameSequence seq = new GameSequence();
 
-      //  seq.setSequence(SecuenceList.get(2));
+        //  seq.setSequence(SecuenceList.get(2));
 
         if (SharedSave.equals(null) || SharedSave.equals("")) {
-            seq.setSequence(SecuenceList.get(0));
+            seq.setSequence(SecuenceListColors.get(0));
         }
 
         if (SharedSave.equals("Bien")) {
             IndexLvl = SharedPoint + 1;
-            if (IndexLvl <= SecuenceList.size() - 1) {
+            if (IndexLvl <= SecuenceListColors.size() - 1) {
                 editor.putInt(Point, IndexLvl);
                 editor.commit();
-                seq.setSequence(SecuenceList.get(IndexLvl));
+                seq.setSequence(SecuenceListColors.get(IndexLvl));
                 Log.d("Shared pointind", String.valueOf(IndexLvl));
             } else {
                 Toast.makeText(getBaseContext(), "Nivel maximo", Toast.LENGTH_SHORT).show();
@@ -168,7 +206,7 @@ public class InitGameActivity extends AppCompatActivity {
             }
         }
         if (SharedSave.equals("Mal")) {
-            seq.setSequence(SecuenceList.get(SharedPoint));
+            seq.setSequence(SecuenceListColors.get(SharedPoint));
             intentos = SharedIntentos + 1;
             Log.d("Shared intentos", String.valueOf(intentos));
             editor.putInt(Intentos, intentos);
@@ -189,12 +227,13 @@ public class InitGameActivity extends AppCompatActivity {
         i.putExtra(GameActivity.SEQUENCE, tx);
         i.putExtra(EXTRA_DEVICE_ADDRESS, address);
         startActivity(i);
+
+        SecuenceListColors.clear();
     }
 
-    public void CallGame2() {
+    public void CallGame2(String indLvl) {
 
         SharedPref();
-
         List<ENnum> SecuenceL1 = new ArrayList<>();
         SecuenceL1.add(ENnum.TXTVIEW11);
         SecuenceL1.add(ENnum.TXTVIEW12);
@@ -216,14 +255,49 @@ public class InitGameActivity extends AppCompatActivity {
         SecuenceL3.add(ENnum.TXTVIEW21);
         SecuenceL3.add(ENnum.TXTVIEWS3);
 
-        List<List<ENnum>> SecuenceList = new ArrayList<>();
-        SecuenceList.add(0, SecuenceL1);
-        SecuenceList.add(1, SecuenceL2);
-        SecuenceList.add(2, SecuenceL3);
-        //SecuenceList.add(3, SecuenceL3);
+        List<ENnum> SecuenceL4 = new ArrayList<>();
+        SecuenceL4.add(ENnum.TXTVIEW11);
+        SecuenceL4.add(ENnum.TXTVIEW12);
+        SecuenceL4.add(ENnum.TXTVIEW13);
+        SecuenceL4.add(ENnum.TXTVIEW14);
+        SecuenceL4.add(ENnum.TXTVIEW21);
+        SecuenceL4.add(ENnum.TXTVIEW22);
+        SecuenceL4.add(ENnum.TXTVIEWS4);
+
+        List<ENnum> SecuenceL5 = new ArrayList<>();
+        SecuenceL5.add(ENnum.TXTVIEW11);
+        SecuenceL5.add(ENnum.TXTVIEW12);
+        SecuenceL5.add(ENnum.TXTVIEW13);
+        SecuenceL5.add(ENnum.TXTVIEW14);
+        SecuenceL5.add(ENnum.TXTVIEW21);
+        SecuenceL5.add(ENnum.TXTVIEW22);
+        SecuenceL5.add(ENnum.TXTVIEW23);
+        SecuenceL5.add(ENnum.TXTVIEWS5);
+
+        switch (indLvl) {
+            case "6años":
+
+                SecuenceList.add(0, SecuenceL1);
+                SecuenceList.add(1, SecuenceL2);
+                SecuenceList.add(2, SecuenceL3);
+                break;
+            //SecuenceList.add(3, SecuenceL3);
+            case "7años":
+                SecuenceList.add(0, SecuenceL2);
+                SecuenceList.add(1, SecuenceL3);
+                SecuenceList.add(2, SecuenceL4);
+                break;
+
+            case "8años":
+                SecuenceList.add(0, SecuenceL3);
+                SecuenceList.add(1, SecuenceL4);
+                SecuenceList.add(2, SecuenceL5);
+                break;
+        }
+
 
         GameNumSequence seq = new GameNumSequence();
-       // seq.setSequence(SecuenceList.get(0));
+        // seq.setSequence(SecuenceList.get(0));
         if (SharedSave.equals(null) || SharedSave.equals("")) {
             seq.setSequence(SecuenceList.get(0));
         }

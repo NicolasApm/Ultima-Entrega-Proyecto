@@ -30,18 +30,10 @@ import OpenHelper.Sqlite_OpenHelper;
 
 public class Registro extends Fragment {
 
-    private Button btnGrabarUsu, btnPrueba1, btnPrueba2, btnPrueba3, btnPrueba4, btnPrueba5;
+    private Button btnGrabarUsu;
     Intent i, j;
     public EditText txtNomusu, txtApellidousu, txtEdadusu;
     private List<EBotones> sequence = new ArrayList<>();
-    private SecuenciaNiv5 secuenciaNiv5 = new SecuenciaNiv5(sequence);
-    private List<ENnum> sequence2 = new ArrayList<>();
-    private Niv6_7Secuence secuenciaNiv67 = new Niv6_7Secuence(sequence2);
-
-    public String getBtAdress() {
-        return btAdress;
-    }
-
     public void setBtAdress(String btAdress) {
         this.btAdress = btAdress;
     }
@@ -81,6 +73,7 @@ public class Registro extends Fragment {
         txtNomusu = (rootView.findViewById(R.id.txtnomusu));
         txtApellidousu = (rootView.findViewById(R.id.txtciudadusu));
         txtEdadusu = (rootView.findViewById(R.id.txtedadusu));
+
         i = new Intent(getActivity(), GameActivity.class);
         j = new Intent(getActivity(), GameSecNumActivity.class);
         // Inflate the layout for this fragment
@@ -96,68 +89,28 @@ public class Registro extends Fragment {
             @Override
             public void onClick(View v) {
 
+                String Nomusu=String.valueOf(txtNomusu.getText());
+                String ape=String.valueOf(txtNomusu.getText());
+                String edad=String.valueOf(txtNomusu.getText());
 
-                Sqlite_OpenHelper helper=new Sqlite_OpenHelper(getActivity(),"usuario",null,1);
-                helper.abrirdb();
-                helper.insertarReg(String.valueOf(txtNomusu.getText()),
-                String.valueOf(txtApellidousu.getText()),
-                String.valueOf(txtEdadusu.getText()));
-                helper.cerrardb();
-
+                if(Nomusu.equals("")||ape.equals("")||edad.equals("")){
+                    Toast.makeText(getContext(), "Debe llenar todos los datos", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else {
+                    Sqlite_OpenHelper helper = new Sqlite_OpenHelper(getActivity(), "usuario", null, 1);
+                    helper.abrirdb();
+                    helper.insertarReg(String.valueOf(txtNomusu.getText()),
+                            String.valueOf(txtApellidousu.getText()),
+                            String.valueOf(txtEdadusu.getText()));
+                    helper.cerrardb();
+                    Toast.makeText(getContext(), "Registro almacenado", Toast.LENGTH_SHORT).show();
+                    txtNomusu.setText("");
+                    txtApellidousu.setText("");
+                    txtEdadusu.setText("");
+                }
             }
         });
-/*
-        btnPrueba1 = getActivity().findViewById(R.id.pruebaNivel);
-        btnPrueba1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                secuenciaNiv5.PrimeraSec();
-                CallGame();
-                sequence.clear();
-            }
-        });
-        btnPrueba2 = getActivity().findViewById(R.id.pruebaNive2);
-        btnPrueba2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                secuenciaNiv5.SegundaSec();
-                CallGame();
-                sequence.clear();
-            }
-        });
-        btnPrueba3 = getActivity().findViewById(R.id.pruebaNive3);
-        btnPrueba3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                secuenciaNiv5.TerceraSec();
-                CallGame();
-                sequence.clear();
-            }
-        });
-
-        btnPrueba4 = getActivity().findViewById(R.id.PruebaNive4);
-        btnPrueba4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                secuenciaNiv5.CuartaSec();
-                CallGame();
-                sequence.clear();
-            }
-        });
-
-        btnPrueba5 = getActivity().findViewById(R.id.PruebaNive5);
-        btnPrueba5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                secuenciaNiv67.PrimeraSec();
-                CallGame2();
-                sequence2.clear();
-            }
-        });*/
     }
 
     public void onButtonPressed(Uri uri) {
@@ -182,33 +135,6 @@ public class Registro extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
-   /* public void CallGame() {
-
-        if (getBtAdress() != null) {
-            GameSequence seq = new GameSequence();
-            seq.setSequence(sequence);
-
-            String tx = new Gson().toJson(seq);
-
-            i.putExtra(GameActivity.SEQUENCE, tx);
-            i.putExtra(GameActivity.BTADD, getBtAdress());
-            startActivity(i);
-        } else {
-            Log.d("nnnnnnnnnn", "Seleccione dispositivo BT primero");
-        }
-    }
-
-    public void CallGame2() {
-
-        GameNumSequence seq = new GameNumSequence();
-        seq.setSequence(sequence2);
-
-        String tx = new Gson().toJson(seq);
-
-        j.putExtra(GameSecNumActivity.SEQUENCE, tx);
-        startActivity(j);
-    }*/
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

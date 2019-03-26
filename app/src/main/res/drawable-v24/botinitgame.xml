@@ -5,7 +5,7 @@
 
         <shape>
             <corners
-                android:radius="50dp" />
+                android:radius="500dp" />
             <stroke
                 android:width="30dp"
                 android:color="@color/borde"
@@ -22,14 +22,14 @@
     <item >
         <shape>
             <corners
-                android:radius="80dp" />
+                android:radius="400dp" />
             <stroke
                 android:width="3dp"
                 android:color="@color/borde"
                 android:dashGap="10dp"
                 android:dashWidth="0dp"
                 />
-            <solid android:color="@color/xdefecto"/>
+            <solid android:color="@color/Init_Game"/>
         </shape>
     </item>
 </selector>

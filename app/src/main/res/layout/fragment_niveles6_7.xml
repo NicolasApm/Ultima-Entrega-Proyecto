@@ -80,9 +80,10 @@
             android:textSize="0sp"></TextView>
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:gravity="center">
 
         <TextView
@@ -96,18 +97,21 @@
 
         <Button
             android:id="@+id/Compare"
-            android:layout_width="wrap_content"
+            style="@style/TeclaNum"
+            android:layout_width="120sp"
+            android:layout_alignRight="@+id/IdBufferIn"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:text="Compare" />
 
         <Button
             android:id="@+id/Siguiente"
-            android:layout_width="wrap_content"
+            android:layout_width="120sp"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_below="@+id/Compare"
+            android:layout_alignRight="@+id/IdBufferIn"
+            style="@style/TeclaNum"
             android:text="Siguiente" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

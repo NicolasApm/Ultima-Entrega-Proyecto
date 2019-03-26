@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:layout_gravity="center_vertical"
     style="@style/FragmentRegistro"
     tools:context=".view.InitGameActivity">
 
-    <Button
-        android:id="@+id/prutng"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Iniciar" />
-</LinearLayout>
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+
+        <Button
+            android:layout_gravity="center_vertical"
+            android:id="@+id/prutng"
+            style="@style/TeclaNum2"
+            android:text="Iniciar" />
+    </LinearLayout>
+
+</RelativeLayout>

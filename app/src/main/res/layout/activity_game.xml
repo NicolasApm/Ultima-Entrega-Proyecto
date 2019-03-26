@@ -173,12 +173,14 @@
                 android:id="@+id/Compare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/TeclaNum"
                 android:text="Comparar" />
 
             <Button
                 android:id="@+id/Siguiente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/TeclaNum"
                 android:text="Siguiente" />
 
 
