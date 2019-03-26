@@ -1,104 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ContenedorNiv"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:orientation="vertical"
     tools:context=".view.GameSecNumActivity">
 
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/tableLayout1"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:shrinkColumns="*"
-        android:stretchColumns="*"
-        tools:context=".view.GameSecNumActivity">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
-        <TableRow
-            android:id="@+id/tableRow1"
+        <TextView
+            android:id="@+id/Txtv11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="55sp"
+            android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/Txtv12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="55sp"
+            android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/Txtv13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="55sp"
+            android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/Txtv14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="55sp"
+            android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/Txtv21"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="55sp"
+            android:textStyle="bold"></TextView>
+
+
+        <TextView
+            android:id="@+id/Txtv22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="55sp"
+            android:textStyle="bold"></TextView>
+
+
+        <TextView
+            android:id="@+id/Txtv23"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="55sp"
+            android:textStyle="bold"></TextView>
+        <TextView
+            android:id="@+id/Txtv24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="0sp"></TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/IdBufferIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:textSize="60sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/Compare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:id="@+id/Txtv11"
-                android:textAlignment="center"
-                android:textSize="90sp"
-                android:textStyle="bold"></TextView>
-
-            <TextView
-                android:id="@+id/Txtv12"
-                android:textAlignment="center"
-                android:textSize="90sp"
-                android:textStyle="bold"></TextView>
-
-
-            <TextView
-                android:id="@+id/Txtv13"
-                android:textAlignment="center"
-                android:textSize="90sp"
-                android:textStyle="bold"></TextView>
-
-            <TextView
-                android:id="@+id/Txtv14"
-                android:textAlignment="center"
-                android:textSize="90sp"
-                android:textStyle="bold"></TextView>
-
-            <TextView
-                android:id="@+id/Txtv21"
-                android:textAlignment="center"
-                android:textSize="90sp"
-                android:textStyle="bold"></TextView>
-
-
-            <TextView
-                android:id="@+id/Txtv22"
-                android:textAlignment="center"
-                android:textSize="90sp"
-                android:textStyle="bold"></TextView>
-
-
-            <TextView
-                android:id="@+id/Txtv23"
-                android:textAlignment="center"
-                android:textSize="90sp"
-                android:textStyle="bold"></TextView>
-
-
-            <TextView
-                android:id="@+id/Txtv24"
-                android:textAlignment="center"
-                android:textSize="90sp"
-                android:textStyle="bold"></TextView>
-        </TableRow>
-
-        <LinearLayout
             android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:text="Compare" />
 
-            <TextView
-                android:id="@+id/IdBufferIn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:textSize="60sp"
-                android:textStyle="bold" />
+        <Button
+            android:id="@+id/Siguiente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Siguiente" />
 
-            <Button
-                android:id="@+id/Siguiente"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Siguiente" />
-        </LinearLayout>
-    </TableLayout>
+    </LinearLayout>
+
 </LinearLayout>

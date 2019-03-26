@@ -15,7 +15,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class GameSecNumPresenterSecNumImpl implements GameSecNumPresenter, BTCallback {
+public class GameSecNumPresenterImpl implements GameSecNumPresenter, BTCallback {
 
     private GameSecNumView view;
     private GameNumSequence sequence;
@@ -38,7 +38,7 @@ public class GameSecNumPresenterSecNumImpl implements GameSecNumPresenter, BTCal
     static String Randstg;
 
 
-    public GameSecNumPresenterSecNumImpl(GameSecNumView view, GameNumSequence sequence, String btAdd) {
+    public GameSecNumPresenterImpl(GameSecNumView view, GameNumSequence sequence, String btAdd) {
         this.view = view;
         this.sequence = sequence;
         this.btAdd = btAdd;
@@ -64,13 +64,12 @@ public class GameSecNumPresenterSecNumImpl implements GameSecNumPresenter, BTCal
                     timer.cancel();
                     view.Borrar("BorrarBotones");
 
-                    try{
+                   /* try{
                         process();
                     }
                     catch (Exception e){
 
-                    }
-                   // process();
+                    }*/
                     return;
                 }
                 btn = sequence.getSequence().get(index);
@@ -95,17 +94,19 @@ public class GameSecNumPresenterSecNumImpl implements GameSecNumPresenter, BTCal
         this.NumRecpt=dataNum;
     }
 
-    private void process() {
-        /*try {
-            String seqSize = String.valueOf(sequence.getSequence().size());
-
+    public void process() {
+        try {
+            String seqSize = String.valueOf(sequence.getSequence().size()-1);
+            String seqIndent = sequence.getSequence().get(sequence.getSequence().size()-1).getId();
             btUtil.connect(btAdd, this);
-           // btUtil.write(seqSize);
+            btUtil.write(seqSize,seqIndent);
+
+            // btUtil.write(seqSize);
         } catch (Exception e) {
             Log.e("Falla Connected", "Error Conexion Bluetooth ", e);
-        }*/
+        }
         Log.d("RECEPCION", NumRecpt);
-        view.Result("BIEN");
+       // view.Result("BIEN");
     }
 
     @Override
@@ -116,12 +117,28 @@ public class GameSecNumPresenterSecNumImpl implements GameSecNumPresenter, BTCal
             Log.e("Close Socket", "Error cerrando", ex);
         }
         Log.d("DataRecept", data);
+
         String[] btns = data.split(",");
+        String[] NumSplit = NumRecpt.split(",");
+
+        String[] invertido = new String[btns.length];
+        for(int i=0;i<btns.length;i++){
+            invertido[i] = btns[btns.length-1-i];
+        }
+        btns = invertido;
+
+        /*String[] invertido2 = new String[NumSplit.length];
+        for(int i=0;i<NumSplit.length;i++){
+            invertido2[i] = NumSplit[NumSplit.length-1-i];
+        }
+        NumSplit = invertido2;*/
+
+        //Log.d("arrayInv", String.valueOf(visu));
 
         boolean flag = true;
 
-        for (int x = 0; x < sequence.getSequence().size(); x++) {
-            String tmp = sequence.getSequence().get(x).getId();
+        for (int x = 0; x < sequence.getSequence().size()-1; x++) {
+            String tmp = NumSplit[x];
 
             try {
                 if (!tmp.equals(btns[x])) {

@@ -8,8 +8,11 @@ public enum ENnum {
     TXTVIEW21("e"),
     TXTVIEW22("f"),
     TXTVIEW23("g"),
-    TXTVIEW24("h");
-
+    TXTVIEW24("h"),
+    TXTVIEWS1("a"),
+    TXTVIEWS2("b"),
+    TXTVIEWS3("c"),
+    TXTVIEWS4("d");
     private String id;
     ENnum(String id) {
         this.id = id;

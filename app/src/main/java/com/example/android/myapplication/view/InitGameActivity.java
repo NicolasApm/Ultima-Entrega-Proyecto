@@ -196,15 +196,17 @@ public class InitGameActivity extends AppCompatActivity {
         SharedPref();
 
         List<ENnum> SecuenceL1 = new ArrayList<>();
+        SecuenceL1.add(ENnum.TXTVIEW11);
+        SecuenceL1.add(ENnum.TXTVIEW12);
         SecuenceL1.add(ENnum.TXTVIEW13);
-        SecuenceL1.add(ENnum.TXTVIEW14);
-        SecuenceL1.add(ENnum.TXTVIEW21);
+        SecuenceL1.add(ENnum.TXTVIEWS1);
 
         List<ENnum> SecuenceL2 = new ArrayList<>();
         SecuenceL2.add(ENnum.TXTVIEW11);
         SecuenceL2.add(ENnum.TXTVIEW12);
         SecuenceL2.add(ENnum.TXTVIEW13);
         SecuenceL2.add(ENnum.TXTVIEW14);
+        SecuenceL2.add(ENnum.TXTVIEWS2);
 
         List<ENnum> SecuenceL3 = new ArrayList<>();
         SecuenceL3.add(ENnum.TXTVIEW11);
@@ -212,6 +214,7 @@ public class InitGameActivity extends AppCompatActivity {
         SecuenceL3.add(ENnum.TXTVIEW13);
         SecuenceL3.add(ENnum.TXTVIEW14);
         SecuenceL3.add(ENnum.TXTVIEW21);
+        SecuenceL3.add(ENnum.TXTVIEWS3);
 
         List<List<ENnum>> SecuenceList = new ArrayList<>();
         SecuenceList.add(0, SecuenceL1);

@@ -1,11 +1,9 @@
 package com.example.android.myapplication.view;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
@@ -15,12 +13,8 @@ import com.example.android.myapplication.R;
 import com.example.android.myapplication.common.ENnum;
 import com.example.android.myapplication.model.GameNumSequence;
 import com.example.android.myapplication.presenter.GameSecNumPresenter;
-import com.example.android.myapplication.presenter.GameSecNumPresenterSecNumImpl;
+import com.example.android.myapplication.presenter.GameSecNumPresenterImpl;
 import com.google.gson.Gson;
-
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -94,7 +88,7 @@ public class GameSecNumActivity extends AppCompatActivity implements GameSecNumV
         String data = getIntent().getStringExtra(SEQUENCE);
         GameNumSequence gs = new Gson().fromJson(data, GameNumSequence.class);
 
-        presenter = new GameSecNumPresenterSecNumImpl(this, gs, address);
+        presenter = new GameSecNumPresenterImpl(this, gs, address);
     }
 
     @Override
@@ -182,6 +176,16 @@ public class GameSecNumActivity extends AppCompatActivity implements GameSecNumV
             editor.putString(Name, e).commit();
         }
         finish();
+    }
+
+    @OnClick(R.id.Compare)
+    void Compare() {
+        try{
+            presenter.process();
+        }
+        catch (Exception e){
+            Log.e("ErrorProces", "No se pudo Compare: ",e);
+        }
     }
 
     @Override

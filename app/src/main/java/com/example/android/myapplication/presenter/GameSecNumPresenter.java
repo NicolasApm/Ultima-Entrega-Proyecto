@@ -8,6 +8,8 @@ public interface GameSecNumPresenter {
 
      void start();
 
+     void process();
+
      void SecuenceRecpt(String data);
 
      void generarSecuencia();
