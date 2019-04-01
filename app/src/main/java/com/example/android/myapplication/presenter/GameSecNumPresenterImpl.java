@@ -33,8 +33,7 @@ public class GameSecNumPresenterImpl implements GameSecNumPresenter, BTCallback 
     //ArrayList<String> lista = new ArrayList<>(sequence.getSequence().size());
 
     static Random RandonGenerator = new Random();
-    static int randomInteger = 0, cont = 0, Rand1 = 0, Rand2 = 0, Rand3 = 0, Rand4 = 0, Rand5 = 0,
-            Rand6 = 0, Rand7;
+    static int randomInteger = 0, cont = 0, Rand1 = 0;
     static String Randstg;
 
 
@@ -91,19 +90,19 @@ public class GameSecNumPresenterImpl implements GameSecNumPresenter, BTCallback 
     }
 
     public void process() {
-       /* try {
-            String seqSize = String.valueOf(sequence.getSequence().size()-1);
-            String seqIndent = sequence.getSequence().get(sequence.getSequence().size()-1).getId();
+        try {
+            String seqSize = String.valueOf(sequence.getSequence().size() - 1);
+            String seqIndent = sequence.getSequence().get(sequence.getSequence().size() - 1).getId();
             btUtil.connect(btAdd, this);
-            btUtil.write(seqSize,seqIndent);
+            btUtil.write(seqSize, seqIndent);
 
             // btUtil.write(seqSize);
         } catch (Exception e) {
             view.Msg("Error Conexion Bluetooth");
             Log.e("Falla Connected", "Error Conexion Bluetooth ", e);
         }
-        Log.d("RECEPCION", NumRecpt);*/
-        view.Result("BIEN");
+        Log.d("RECEPCION", NumRecpt);
+        //view.Result("MAL");
     }
 
     @Override

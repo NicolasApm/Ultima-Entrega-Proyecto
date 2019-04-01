@@ -6,6 +6,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.android.myapplication.R;
@@ -27,12 +31,19 @@ public class InitGameActivity extends AppCompatActivity {
 
     public static String EXTRA_DEVICE_ADDRESS = "device_address";
     public static final String mypreference = "mypref";
+    public static final String mypreference2 = "mypref";
     public static final String Name = "nameKey";
     public static final String Point = "pointKey";
     public static final String PointInd = "poinindtKey";
     public static final String Intentos = "intentosKey";
+    public static final String Name2 = "nameKey";
+    public static final String Point2 = "pointKey";
+    public static final String PointInd2 = "poinindtKey";
+    public static final String Intentos2 = "intentosKey";
     private SharedPreferences sharedpreferences;
+    private SharedPreferences sharedpreferences2;
     private SharedPreferences.Editor editor;
+    private SharedPreferences.Editor editor2;
     private List<ENnum> sequence2 = new ArrayList<>();
     private Niv6_7Secuence secuenciaNiv67 = new Niv6_7Secuence(sequence2);
     List<List<ENnum>> SecuenceList = new ArrayList<>();
@@ -43,6 +54,9 @@ public class InitGameActivity extends AppCompatActivity {
     private String SharedSave = "";
     private String findAgeUser;
     private int SharedPoint = 0, IndexLvl = 0, SharedIntentos, intentos = 0;
+    private String SharedSave2 = "";
+
+    private int SharedPoint2 = 0, IndexLvl2 = 0, SharedIntentos2, intentos2 = 0;
     private Intent i, j;
 
 
@@ -124,6 +138,29 @@ public class InitGameActivity extends AppCompatActivity {
             SharedIntentos = sharedpreferences.getInt(Intentos, 0);
             Log.d("Shared intentos", String.valueOf(Intentos));
         }
+
+
+    }
+    public void SharedPref2() {
+        sharedpreferences2 = getSharedPreferences(mypreference2, Context.MODE_PRIVATE);
+        editor2 = sharedpreferences2.edit();
+
+        if (sharedpreferences2.contains(Name2)) {
+            SharedSave2 = sharedpreferences2.getString(Name, "");
+            Log.d("Shared name", SharedSave2);
+        }
+        if (sharedpreferences2.contains(Point2)) {
+            SharedPoint2 = sharedpreferences2.getInt(Point2, 0);
+            Log.d("Shared point", String.valueOf(SharedPoint2));
+        }
+        if (sharedpreferences2.contains(PointInd2)) {
+            IndexLvl2 = sharedpreferences2.getInt(PointInd2, 0);
+            Log.d("Shared pointind", String.valueOf(IndexLvl2));
+        }
+        if (sharedpreferences2.contains(Intentos2)) {
+            SharedIntentos2 = sharedpreferences2.getInt(Intentos2, 0);
+            Log.d("Shared intentos", String.valueOf(Intentos2));
+        }
     }
 
     public void CallGame() {
@@ -197,12 +234,13 @@ public class InitGameActivity extends AppCompatActivity {
                 seq.setSequence(SecuenceListColors.get(IndexLvl));
                 Log.d("Shared pointind", String.valueOf(IndexLvl));
             } else {
-                Toast.makeText(getBaseContext(), "Nivel maximo", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getBaseContext(), "Nivel maximo", Toast.LENGTH_SHORT).show();
                 editor.putInt(Intentos, 0);
                 editor.putInt(Point, 0);
                 editor.putInt(PointInd, 0);
                 editor.putString(Name, "");
                 editor.commit();
+                ToastPesonalizado(true);
                 return;
             }
         }
@@ -213,12 +251,13 @@ public class InitGameActivity extends AppCompatActivity {
             editor.putInt(Intentos, intentos);
             editor.commit();
             if (SharedIntentos == 3) {
-                Toast.makeText(getBaseContext(), "Perdiste", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getBaseContext(), "Perdiste", Toast.LENGTH_SHORT).show();
                 editor.putInt(Intentos, 0);
                 editor.putInt(PointInd, 0);
                 editor.putInt(Point, 0);
                 editor.putString(Name, "");
                 editor.commit();
+                ToastPesonalizado(false);
                 return;
             }
         }
@@ -234,7 +273,9 @@ public class InitGameActivity extends AppCompatActivity {
 
     public void CallGame2(String indLvl) {
 
-        SharedPref();
+        boolean flag=false;
+
+        SharedPref2();
         List<ENnum> SecuenceL1 = new ArrayList<>();
         SecuenceL1.add(ENnum.TXTVIEW11);
         SecuenceL1.add(ENnum.TXTVIEW12);
@@ -299,49 +340,71 @@ public class InitGameActivity extends AppCompatActivity {
 
         GameNumSequence seq = new GameNumSequence();
         // seq.setSequence(SecuenceList.get(0));
-        if (SharedSave.equals(null) || SharedSave.equals("")) {
+        if (SharedSave2.equals(null) || SharedSave2.equals("")) {
             seq.setSequence(SecuenceList.get(0));
         }
 
-        if (SharedSave.equals("Bien")) {
-            IndexLvl = SharedPoint + 1;
-            if (IndexLvl <= SecuenceList.size() - 1) {
-                editor.putInt(Point, IndexLvl);
-                editor.commit();
-                seq.setSequence(SecuenceList.get(IndexLvl));
-                Log.d("Shared pointind", String.valueOf(IndexLvl));
+        if (SharedSave2.equals("Bien")) {
+            IndexLvl2 = SharedPoint2 + 1;
+            if (IndexLvl2 <= SecuenceList.size() - 1) {
+                editor2.putInt(Point2, IndexLvl2);
+                editor2.commit();
+                seq.setSequence(SecuenceList.get(IndexLvl2));
+                Log.d("Shared pointind", String.valueOf(IndexLvl2));
             } else {
-                Toast.makeText(getBaseContext(), "Nivel maximo", Toast.LENGTH_SHORT).show();
-                editor.putInt(Intentos, 0);
-                editor.putInt(Point, 0);
-                editor.putInt(PointInd, 0);
-                editor.putString(Name, "");
-                editor.commit();
+                //Toast.makeText(getBaseContext(), "Nivel maximo", Toast.LENGTH_SHORT).show();
+                ToastPesonalizado(true);
+                editor2.putInt(Intentos2, 0);
+                editor2.putInt(Point2, 0);
+                editor2.putInt(PointInd2, 0);
+                editor2.putString(Name2, "");
+                editor2.commit();
                 return;
             }
         }
-        if (SharedSave.equals("Mal")) {
-            seq.setSequence(SecuenceList.get(SharedPoint));
-            intentos = SharedIntentos + 1;
-            Log.d("Shared intentos", String.valueOf(intentos));
-            editor.putInt(Intentos, intentos);
-            editor.commit();
-            if (SharedIntentos == 3) {
+        if (SharedSave2.equals("Mal")) {
+            seq.setSequence(SecuenceList.get(SharedPoint2));
+            intentos2 = SharedIntentos2 + 1;
+            Log.d("Shared intentos", String.valueOf(intentos2));
+            editor2.putInt(Intentos2, intentos2);
+            editor2.commit();
+            if (SharedIntentos2 == 3) {
                 Toast.makeText(getBaseContext(), "Perdiste", Toast.LENGTH_SHORT).show();
-                editor.putInt(Intentos, 0);
-                editor.putInt(PointInd, 0);
-                editor.putInt(Point, 0);
-                editor.putString(Name, "");
-                editor.commit();
+                editor2.putInt(Intentos2, 0);
+                editor2.putInt(PointInd2, 0);
+                editor2.putInt(Point2, 0);
+                editor2.putString(Name2, "");
+                editor2.commit();
+                ToastPesonalizado(false);
                 return;
             }
         }
-        editor.putString(Name, "").commit();
+        editor2.putString(Name2, "").commit();
 
         String tx = new Gson().toJson(seq);
         j.putExtra(GameSecNumActivity.SEQUENCE, tx);
         j.putExtra(EXTRA_DEVICE_ADDRESS, address);
         startActivity(j);
+    }
+
+    public void ToastPesonalizado(boolean flag) {
+
+        LayoutInflater inflater = getLayoutInflater();
+        if (flag) {
+
+            View view = inflater.inflate(R.layout.custom_toast_ganaste, (ViewGroup) findViewById(R.id.Layoutganar));
+            Toast toast = new Toast(this);
+            toast.setView(view);
+            toast.setGravity(Gravity.TOP, 0, 0);
+            toast.show();
+        } else {
+            View view = inflater.inflate(R.layout.custom_toast_perdiste, (ViewGroup) findViewById(R.id.Layoutperder));
+            Toast toast = new Toast(this);
+            toast.setView(view);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
+
     }
 }
 

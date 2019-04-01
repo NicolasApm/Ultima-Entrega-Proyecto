@@ -29,12 +29,12 @@ public class GameSecNumActivity extends AppCompatActivity implements GameSecNumV
 
     public static final String SEQUENCE = "SEQ";
     static String Randstg;
-    public static final String Name = "nameKey";
-    public static final String Point = "pointKey";
-    public static final String mypreference = "mypref";
+    public static final String Name2 = "nameKey";
+    public static final String Point2 = "pointKey";
+    public static final String mypreference2 = "mypref";
     private String Result = "";
 
-    SharedPreferences sharedpreferences;
+    SharedPreferences sharedpreferences2;
 
     @BindView(R.id.Txtv11)
     TextView txtv11;
@@ -54,8 +54,6 @@ public class GameSecNumActivity extends AppCompatActivity implements GameSecNumV
     @BindView(R.id.Txtv24)
     TextView txtv24;
 
-    @BindView(R.id.IdBufferIn)
-    TextView IdBufferIn;
 
     @BindView(R.id.Siguiente)
     Button Siguiente;
@@ -174,18 +172,18 @@ public class GameSecNumActivity extends AppCompatActivity implements GameSecNumV
 
         String n = "Bien";
         String e = "Mal";
-        sharedpreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.commit();
-        editor.putString(Name, n);
-        editor.commit();
+        sharedpreferences2 = getSharedPreferences(mypreference2, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = sharedpreferences2.edit();
+        editor2.commit();
+        editor2.putString(Name2, n);
+        editor2.commit();
         Log.d("result", Result);
         if (Result.equals("BIEN")) {
-            editor.putString(Name, n).commit();
+            editor2.putString(Name2, n).commit();
 
             // editor.putInt(Point, 1).commit();
         } else {
-            editor.putString(Name, e).commit();
+            editor2.putString(Name2, e).commit();
         }
         finish();
     }
@@ -279,5 +277,6 @@ public class GameSecNumActivity extends AppCompatActivity implements GameSecNumV
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         }
+
     }
 }

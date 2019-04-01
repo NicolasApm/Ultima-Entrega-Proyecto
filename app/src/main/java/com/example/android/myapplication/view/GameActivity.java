@@ -6,7 +6,10 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,9 +78,6 @@ public class GameActivity extends AppCompatActivity implements GameView, Conecta
     Button btn43;
     @BindView(R.id.btn44)
     Button btn44;
-
-    @BindView(R.id.IdBufferIn)
-    TextView IdBufferIn;
 
     @BindView(R.id.Siguiente)
     Button Siguiente;
@@ -160,7 +160,16 @@ public class GameActivity extends AppCompatActivity implements GameView, Conecta
     @Override
     public void Result(String Result) {
         this.Result = Result;
-        IdBufferIn.setText(Result);
+
+        boolean flag;
+        if (Result.equals("BIEN")) {
+            flag = true;
+            ToastPesonalizado(flag);
+            //IdBufferIn.setText(Result);
+        } else {
+            flag = false;
+            ToastPesonalizado(flag);
+        }
     }
 
     @Override
@@ -300,9 +309,7 @@ public class GameActivity extends AppCompatActivity implements GameView, Conecta
 
     @Override
     public void showData(String data) {
-
         Toast.makeText(getBaseContext(), data, Toast.LENGTH_LONG).show();
-
     }
 
     @Override
@@ -313,6 +320,24 @@ public class GameActivity extends AppCompatActivity implements GameView, Conecta
     @Override
     public void RunOnMain(Runnable action) {
 
+    }
+    public void ToastPesonalizado(boolean flag) {
+
+        LayoutInflater inflater = getLayoutInflater();
+        if (flag) {
+
+            View view = inflater.inflate(R.layout.custom_toast_layout, (ViewGroup) findViewById(R.id.relativeLayout1));
+            Toast toast = new Toast(this);
+            toast.setView(view);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        } else {
+            View view = inflater.inflate(R.layout.custom_toast_layout2, (ViewGroup) findViewById(R.id.relativeLayout2));
+            Toast toast = new Toast(this);
+            toast.setView(view);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
     }
 
 }

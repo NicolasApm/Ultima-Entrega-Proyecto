@@ -29,6 +29,10 @@ public class MainActivity extends AppCompatActivity implements
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+           menuUcc=new MenuUcc();
+           FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
+           fragmentTransaction.replace(R.id.ContenedorFragmentos,menuUcc);
+           fragmentTransaction.commit();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

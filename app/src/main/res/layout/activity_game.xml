@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/FondoGame"
     android:orientation="vertical"
     android:weightSum="4"
-    android:background="@color/FondoGame"
     tools:context=".view.GameActivity">
 
     <LinearLayout
@@ -149,43 +149,26 @@
             android:layout_weight="1" />
     </LinearLayout>
 
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/IdBufferIn"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/Compare"
+            style="@style/TeclaNum"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:textSize="60sp"
-            android:textStyle="bold" />
+            android:text="Comparar" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/Siguiente"
+            style="@style/TeclaNum"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:text="Siguiente" />
 
-            <Button
-                android:id="@+id/Compare"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/TeclaNum"
-                android:text="Comparar" />
-
-            <Button
-                android:id="@+id/Siguiente"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/TeclaNum"
-                android:text="Siguiente" />
-
-
-
-        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

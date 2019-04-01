@@ -89,7 +89,6 @@ public class GamePresenterImpl implements GamePresenter, BTCallback {
         } catch (Exception e) {
             Log.e("Falla Connected", "Error Conexion Bluetooth ", e);
         }
-        // view.Result("MAL");
     }
 
     @Override
