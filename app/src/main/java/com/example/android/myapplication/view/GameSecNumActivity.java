@@ -6,8 +6,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.myapplication.R;
 import com.example.android.myapplication.common.ENnum;
@@ -23,11 +28,7 @@ import butterknife.OnClick;
 public class GameSecNumActivity extends AppCompatActivity implements GameSecNumView, MenuUcc.OnFragmentInteractionListener {
 
     public static final String SEQUENCE = "SEQ";
-    private String SentNum = "";
     static String Randstg;
-
-
-    public static final String BTADD = "BTADD";
     public static final String Name = "nameKey";
     public static final String Point = "pointKey";
     public static final String mypreference = "mypref";
@@ -155,8 +156,18 @@ public class GameSecNumActivity extends AppCompatActivity implements GameSecNumV
     @Override
     public void Result(String Result) {
         this.Result = Result;
-        IdBufferIn.setText(Result);
+        boolean flag;
+        if (Result.equals("BIEN")) {
+            flag = true;
+            ToastPesonalizado(flag);
+            //IdBufferIn.setText(Result);
+        } else {
+            flag = false;
+            ToastPesonalizado(flag);
+        }
+
     }
+
 
     @OnClick(R.id.Siguiente)
     void Siguiente() {
@@ -171,6 +182,7 @@ public class GameSecNumActivity extends AppCompatActivity implements GameSecNumV
         Log.d("result", Result);
         if (Result.equals("BIEN")) {
             editor.putString(Name, n).commit();
+
             // editor.putInt(Point, 1).commit();
         } else {
             editor.putString(Name, e).commit();
@@ -180,17 +192,21 @@ public class GameSecNumActivity extends AppCompatActivity implements GameSecNumV
 
     @OnClick(R.id.Compare)
     void Compare() {
-        try{
+        try {
             presenter.process();
-        }
-        catch (Exception e){
-            Log.e("ErrorProces", "No se pudo Compare: ",e);
+        } catch (Exception e) {
+            Log.e("ErrorProces", "No se pudo Compare: ", e);
         }
     }
 
     @Override
     public void SentNum(String SentNum) {
         this.Randstg = SentNum;
+    }
+
+    @Override
+    public void Msg(String msg) {
+        Toast.makeText(getBaseContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
     //Encender los botones
@@ -244,5 +260,24 @@ public class GameSecNumActivity extends AppCompatActivity implements GameSecNumV
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    public void ToastPesonalizado(boolean flag) {
+
+        LayoutInflater inflater = getLayoutInflater();
+        if (flag) {
+
+            View view = inflater.inflate(R.layout.custom_toast_layout, (ViewGroup) findViewById(R.id.relativeLayout1));
+            Toast toast = new Toast(this);
+            toast.setView(view);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        } else {
+            View view = inflater.inflate(R.layout.custom_toast_layout2, (ViewGroup) findViewById(R.id.relativeLayout2));
+            Toast toast = new Toast(this);
+            toast.setView(view);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
     }
 }

@@ -8,4 +8,5 @@ public interface GameView {
     void offButton(EBotones btn);
     void Borrar(String borrar);
     void Result(String Result);
+    void Msg(String msg);
 }

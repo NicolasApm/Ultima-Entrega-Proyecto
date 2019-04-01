@@ -21,20 +21,20 @@ public class GameSecNumPresenterImpl implements GameSecNumPresenter, BTCallback 
     private GameNumSequence sequence;
     private boolean started = false;
     // TIMEPO DE SECUENCIA
-    private final int SEQ_TIME = 2000;
+    private final int SEQ_TIME = 500;
     private int index = 0;
     private boolean isOn = false;
     private Timer timer = new Timer();
     private ENnum btn = null;
     private String btAdd;
     private BTUtil btUtil;
-    private String NumRecpt="";
+    private String NumRecpt = "";
 
     //ArrayList<String> lista = new ArrayList<>(sequence.getSequence().size());
 
     static Random RandonGenerator = new Random();
     static int randomInteger = 0, cont = 0, Rand1 = 0, Rand2 = 0, Rand3 = 0, Rand4 = 0, Rand5 = 0,
-                                            Rand6 = 0,Rand7 ;
+            Rand6 = 0, Rand7;
     static String Randstg;
 
 
@@ -58,37 +58,40 @@ public class GameSecNumPresenterImpl implements GameSecNumPresenter, BTCallback 
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                // si no se ha terminado
-                //cancelar si el indice es igual a numero de la secuencia
-                if (sequence.getSequence().size() <= index) {
-                    timer.cancel();
-                    view.Borrar("BorrarBotones");
-                    return;
-                }
-                btn = sequence.getSequence().get(index);
-                if (isOn) {
-                    //condicion para validar si estan encendidos los botones
-                    //view.offButton(btn);
-                    isOn = false;
-                    index++;
-                } else {
-                    //Encender si estan apagados
-                    view.onButton(btn);
-                    isOn = true;
+                try {
+                    // si no se ha terminado
+                    //cancelar si el indice es igual a numero de la secuencia
+                    if (sequence.getSequence().size() <= index) {
+                        timer.cancel();
+                        view.Borrar("BorrarBotones");
+                        return;
+                    }
+                    btn = sequence.getSequence().get(index);
+                    if (isOn) {
+                        //condicion para validar si estan encendidos los botones
+                        //view.offButton(btn);
+                        isOn = false;
+                        index++;
+                    } else {
+                        //Encender si estan apagados
+                        view.onButton(btn);
+                        isOn = true;
+                    }
+                } catch (Exception e) {
+                    view.Msg("Intenta de nuevo");
                 }
             }
         }, 1000, SEQ_TIME);
     }
 
 
-
     @Override
     public void SecuenceRecpt(String dataNum) {
-        this.NumRecpt=dataNum;
+        this.NumRecpt = dataNum;
     }
 
     public void process() {
-        try {
+       /* try {
             String seqSize = String.valueOf(sequence.getSequence().size()-1);
             String seqIndent = sequence.getSequence().get(sequence.getSequence().size()-1).getId();
             btUtil.connect(btAdd, this);
@@ -96,10 +99,11 @@ public class GameSecNumPresenterImpl implements GameSecNumPresenter, BTCallback 
 
             // btUtil.write(seqSize);
         } catch (Exception e) {
+            view.Msg("Error Conexion Bluetooth");
             Log.e("Falla Connected", "Error Conexion Bluetooth ", e);
         }
-        Log.d("RECEPCION", NumRecpt);
-       // view.Result("BIEN");
+        Log.d("RECEPCION", NumRecpt);*/
+        view.Result("BIEN");
     }
 
     @Override
@@ -107,6 +111,7 @@ public class GameSecNumPresenterImpl implements GameSecNumPresenter, BTCallback 
         try {
             btUtil.close();
         } catch (Exception ex) {
+            view.Msg("Error cerrando Bluetooth");
             Log.e("Close Socket", "Error cerrando", ex);
         }
         Log.d("DataRecept", data);
@@ -115,14 +120,14 @@ public class GameSecNumPresenterImpl implements GameSecNumPresenter, BTCallback 
         String[] NumSplit = NumRecpt.split(",");
 
         String[] invertido = new String[btns.length];
-        for(int i=0;i<btns.length;i++){
-            invertido[i] = btns[btns.length-1-i];
+        for (int i = 0; i < btns.length; i++) {
+            invertido[i] = btns[btns.length - 1 - i];
         }
         btns = invertido;
 
-       boolean flag = true;
+        boolean flag = true;
 
-        for (int x = 0; x < sequence.getSequence().size()-1; x++) {
+        for (int x = 0; x < sequence.getSequence().size() - 1; x++) {
             String tmp = NumSplit[x];
 
             try {

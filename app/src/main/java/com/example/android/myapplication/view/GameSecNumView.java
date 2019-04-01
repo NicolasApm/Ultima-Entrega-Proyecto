@@ -9,5 +9,6 @@ public interface GameSecNumView {
     void Borrar(String borrar);
     void Result(String Result);
     void SentNum(String SentNum);
+    void Msg(String msg);
 
 }

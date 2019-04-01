@@ -163,6 +163,11 @@ public class GameActivity extends AppCompatActivity implements GameView, Conecta
         IdBufferIn.setText(Result);
     }
 
+    @Override
+    public void Msg(String msg) {
+        Toast.makeText(getBaseContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+
     @OnClick(R.id.Siguiente)
     void Siguiente() {
 

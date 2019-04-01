@@ -17,7 +17,7 @@ public class GamePresenterImpl implements GamePresenter, BTCallback {
     private GameSequence sequence;
     private boolean started = false;
     // TIMEPO DE SECUENCIA
-    private final int SEQ_TIME = 2000;
+    private final int SEQ_TIME =500;
     private int index = 0;
     private boolean isOn = false;
     private Timer timer = new Timer();
@@ -40,34 +40,39 @@ public class GamePresenterImpl implements GamePresenter, BTCallback {
 
     @Override
     public void start() {
+
         if (started) return;
         started = true;
         //timmer
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                // si no se ha terminado
-                //cancelar si el indice es igual a numero de la secuencia
-                if (sequence.getSequence().size() <= index) {
-                    timer.cancel();
-                    view.Borrar("BorrarBotones");
+                try {
+                    // si no se ha terminado
+                    //cancelar si el indice es igual a numero de la secuencia
+                    if (sequence.getSequence().size() <= index) {
+                        timer.cancel();
+                        view.Borrar("BorrarBotones");
                    /* try{
                     process();}
                     catch (Exception e){
 
                     }*/
-                    return;
-                }
-                btn = sequence.getSequence().get(index);
-                if (isOn) {
-                    //condicion para validar si estan encendidos los botones
-                    //view.offButton(btn);
-                    isOn = false;
-                    index++;
-                } else {
-                    //Encender si estan apagados
-                    view.onButton(btn);
-                    isOn = true;
+                        return;
+                    }
+                    btn = sequence.getSequence().get(index);
+                    if (isOn) {
+                        //condicion para validar si estan encendidos los botones
+                        //view.offButton(btn);
+                        isOn = false;
+                        index++;
+                    } else {
+                        //Encender si estan apagados
+                        view.onButton(btn);
+                        isOn = true;
+                    }
+                } catch (Exception e) {
+                    view.Msg("Intenta de nuevo");
                 }
             }
         }, 1000, SEQ_TIME);
@@ -76,15 +81,15 @@ public class GamePresenterImpl implements GamePresenter, BTCallback {
     public void process() {
 
         try {
-            String seqSize = String.valueOf(sequence.getSequence().size()-1);
-            String seqIndent = sequence.getSequence().get(sequence.getSequence().size()-1).getId();
+            String seqSize = String.valueOf(sequence.getSequence().size() - 1);
+            String seqIndent = sequence.getSequence().get(sequence.getSequence().size() - 1).getId();
 
             btUtil.connect(btAdd, this);
-            btUtil.write(seqSize,seqIndent);
+            btUtil.write(seqSize, seqIndent);
         } catch (Exception e) {
             Log.e("Falla Connected", "Error Conexion Bluetooth ", e);
         }
-       // view.Result("MAL");
+        // view.Result("MAL");
     }
 
     @Override
@@ -95,36 +100,36 @@ public class GamePresenterImpl implements GamePresenter, BTCallback {
         } catch (Exception ex) {
             Log.e("Close Socket", "Error cerrando", ex);
         }
-        try{
-        Log.d("DataRecept", data);
-        String[] btns = data.split(",");
-          //  List<EBotones> lista = new ArrayList<>();
-        boolean flag = true;
+        try {
+            Log.d("DataRecept", data);
+            String[] btns = data.split(",");
+            //  List<EBotones> lista = new ArrayList<>();
+            boolean flag = true;
 
-        for (int x = 0; x < sequence.getSequence().size()-1; x++) {
-            String tmp = sequence.getSequence().get(x).getId();
-            try {
-                if (!tmp.equals(btns[x])) {
+            for (int x = 0; x < sequence.getSequence().size() - 1; x++) {
+                String tmp = sequence.getSequence().get(x).getId();
+                try {
+                    if (!tmp.equals(btns[x])) {
+                        flag = false;
+                        break;
+                    }
+                } catch (Exception ex) {
                     flag = false;
                     break;
                 }
-            } catch (Exception ex) {
-                flag = false;
-                break;
             }
-        }
 
-        if (flag) {
-            Log.d("Comparacion Secuencia", "Bien");
-            view.Result("BIEN");
-        } else {
-            Log.d("Comparacion Secuencia", "Mal");
-            view.Result("MAL");
-        }
-        btUtil.close();
-    }catch (Exception e){
+            if (flag) {
+                Log.d("Comparacion Secuencia", "Bien");
+                view.Result("BIEN");
+            } else {
+                Log.d("Comparacion Secuencia", "Mal");
+                view.Result("MAL");
+            }
+            btUtil.close();
+        } catch (Exception e) {
 
-            view.Result("Intenta de nuevo");
+            view.Msg("Intenta de nuevo");
         }
     }
 
