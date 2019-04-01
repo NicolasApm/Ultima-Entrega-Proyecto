@@ -69,10 +69,11 @@ public class InitGameActivity extends AppCompatActivity {
         try {
             int findAgeUserInt = Integer.parseInt(findAgeUser);
             if (findAgeUserInt <= 5) {
-                CallGame();
 
+                CallGame();
             }
             if (findAgeUserInt == 6) {
+
                 IndLvl = "6años";
                 //secuenciaNiv67.CuartaSec();
                 CallGame2(IndLvl);
@@ -85,7 +86,7 @@ public class InitGameActivity extends AppCompatActivity {
                 //secuenciaNiv67.CuartaSec();
                 CallGame2(IndLvl);
                 SecuenceList.clear();
-               // Toast.makeText(this, findAgeUser, Toast.LENGTH_SHORT).show();
+                // Toast.makeText(this, findAgeUser, Toast.LENGTH_SHORT).show();
             }
             if (findAgeUserInt == 8) {
                 IndLvl = "8años";

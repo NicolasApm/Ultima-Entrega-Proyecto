@@ -21,7 +21,7 @@ public class GameSecNumPresenterImpl implements GameSecNumPresenter, BTCallback 
     private GameNumSequence sequence;
     private boolean started = false;
     // TIMEPO DE SECUENCIA
-    private final int SEQ_TIME = 1000;
+    private final int SEQ_TIME = 2000;
     private int index = 0;
     private boolean isOn = false;
     private Timer timer = new Timer();
@@ -63,13 +63,6 @@ public class GameSecNumPresenterImpl implements GameSecNumPresenter, BTCallback 
                 if (sequence.getSequence().size() <= index) {
                     timer.cancel();
                     view.Borrar("BorrarBotones");
-
-                   /* try{
-                        process();
-                    }
-                    catch (Exception e){
-
-                    }*/
                     return;
                 }
                 btn = sequence.getSequence().get(index);
@@ -127,15 +120,7 @@ public class GameSecNumPresenterImpl implements GameSecNumPresenter, BTCallback 
         }
         btns = invertido;
 
-        /*String[] invertido2 = new String[NumSplit.length];
-        for(int i=0;i<NumSplit.length;i++){
-            invertido2[i] = NumSplit[NumSplit.length-1-i];
-        }
-        NumSplit = invertido2;*/
-
-        //Log.d("arrayInv", String.valueOf(visu));
-
-        boolean flag = true;
+       boolean flag = true;
 
         for (int x = 0; x < sequence.getSequence().size()-1; x++) {
             String tmp = NumSplit[x];

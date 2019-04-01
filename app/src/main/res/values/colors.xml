@@ -7,7 +7,7 @@
     <color name="presionado">#F44336</color>
     <color name="borde">#C62525</color>
     <color name="foco">#ff141177</color>
-    <color name="xdefecto">#61F5CF</color>
+    <color name="xdefecto">#0061F5CF</color>
     <color name="xdefecto1">#800033FF</color>
     <color name="xdefecto2">#8000FF33</color>
     <color name="xdefecto3">#80FFFF00</color>
@@ -30,5 +30,7 @@
     <color name="Azul_Claro">#3c9ef4</color>
     <color name="Verde_Oscuro">#025824</color>
     <color name="Init_Game">#FF9800</color>
+    <color name="NegroC">#000000</color>
+    <color name="FondoGame">#2F02E8FF</color>
 
 </resources>

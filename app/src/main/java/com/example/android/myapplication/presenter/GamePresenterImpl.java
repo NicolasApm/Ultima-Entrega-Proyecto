@@ -17,7 +17,7 @@ public class GamePresenterImpl implements GamePresenter, BTCallback {
     private GameSequence sequence;
     private boolean started = false;
     // TIMEPO DE SECUENCIA
-    private final int SEQ_TIME = 1000;
+    private final int SEQ_TIME = 2000;
     private int index = 0;
     private boolean isOn = false;
     private Timer timer = new Timer();
@@ -95,6 +95,7 @@ public class GamePresenterImpl implements GamePresenter, BTCallback {
         } catch (Exception ex) {
             Log.e("Close Socket", "Error cerrando", ex);
         }
+        try{
         Log.d("DataRecept", data);
         String[] btns = data.split(",");
           //  List<EBotones> lista = new ArrayList<>();
@@ -121,6 +122,10 @@ public class GamePresenterImpl implements GamePresenter, BTCallback {
             view.Result("MAL");
         }
         btUtil.close();
+    }catch (Exception e){
+
+            view.Result("Intenta de nuevo");
+        }
     }
 
     @Override

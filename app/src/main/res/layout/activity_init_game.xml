@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_gravity="center_vertical"
     style="@style/FragmentRegistro"
+    android:background="@color/Verde_Claro2"
     tools:context=".view.InitGameActivity">
 
     <LinearLayout
@@ -17,7 +18,7 @@
             android:layout_gravity="center_vertical"
             android:id="@+id/prutng"
             style="@style/TeclaNum2"
-            android:text="Iniciar" />
+            android:text="JUGAR" />
     </LinearLayout>
 
 </RelativeLayout>
